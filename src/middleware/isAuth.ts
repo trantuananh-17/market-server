@@ -1,7 +1,9 @@
 import { sendErrorRes } from "./../utils/helper";
 import { RequestHandler } from "express";
 import jwt, { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
+import PasswordResetToken from "src/models/passwordResetToken";
 import UserModel from "src/models/user";
+import "dotenv/config";
 
 interface UserProfile {
   id: string;
@@ -30,7 +32,9 @@ export const isAuth: RequestHandler = async (req, res, next) => {
     const token = authToken.split("Bearer ")[1];
 
     // Lấy id người dùng từ token (sẽ có nó dưới dạng payload).
-    const payload = jwt.verify(token, "secret") as { id: string };
+    const payload = jwt.verify(token, `${process.env.JWT_SECRET}`) as {
+      id: string;
+    };
 
     // Kiểm tra xem có người dùng với id này không.
     const user = await UserModel.findById(payload.id);
@@ -57,4 +61,19 @@ export const isAuth: RequestHandler = async (req, res, next) => {
 
     next(error);
   }
+};
+
+export const isValidPassResetToken: RequestHandler = async (req, res, next) => {
+  const { id, token } = req.body;
+  const resetPassToken = await PasswordResetToken.findOne({ owner: id });
+
+  if (!resetPassToken)
+    return sendErrorRes(res, "Unauthorized request, invalid token!", 403);
+
+  const matched = await resetPassToken.compareToken(token);
+
+  if (!matched)
+    return sendErrorRes(res, "Unauthorized request, invalid token!", 403);
+
+  next();
 };
