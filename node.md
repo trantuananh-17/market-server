@@ -78,3 +78,41 @@ authRouter.post("/reset-pass");
 # `/sign-out`
 
 1. Remove the refresh token
+
+# `/forget-pass`
+
+1. Yêu cầu email của người dùng.
+2. Tìm người dùng với email đã cung cấp.
+3. Gửi lỗi nếu không có người dùng.
+4. Nếu có người dùng, tạo mã reset mật khẩu (xóa nếu có mã nào trước đó).
+5. Tạo liên kết reset mật khẩu (giống như cách chúng ta đã làm với xác minh).
+6. Gửi liên kết vào email của người dùng.
+7. Gửi phản hồi trở lại.
+
+# `/verify-pass`
+
+1. Đọc mã token và id.
+2. Tìm mã token trong cơ sở dữ liệu với id của chủ sở hữu.
+3. Nếu không có mã token, gửi lỗi.
+4. Nếu có mã token, so sánh với giá trị đã được mã hóa.
+5. Nếu không trùng khớp, gửi lỗi.
+6. Nếu trùng khớp, gọi hàm tiếp theo.
+
+# `/reset-pass`
+
+1. Đọc id người dùng, mã reset mật khẩu và mật khẩu.
+2. Xác thực tất cả các thông tin này.
+3. Nếu hợp lệ, tìm người dùng với id đã cung cấp.
+4. Kiểm tra xem người dùng có sử dụng mật khẩu cũ không.
+5. Nếu không có người dùng hoặc người dùng đang sử dụng mật khẩu cũ, gửi lỗi.
+6. Nếu không, cập nhật mật khẩu mới.
+7. Xóa mã reset mật khẩu.
+8. Gửi email xác nhận.
+9. Gửi phản hồi trở lại.
+
+# `/update-profile`
+
+1. Người dùng phải đăng nhập (đã xác thực).
+2. Tên phải hợp lệ.
+3. Tìm người dùng và cập nhật tên.
+4. Gửi lại hồ sơ mới.

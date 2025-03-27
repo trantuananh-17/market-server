@@ -3,6 +3,7 @@ import "src/db";
 import express from "express";
 import authRouter from "./routes/auth";
 import { sendErrorRes } from "./utils/helper";
+import "dotenv/config";
 
 const app = express();
 

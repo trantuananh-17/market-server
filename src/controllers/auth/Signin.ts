@@ -20,11 +20,11 @@ export const SignIn: RequestHandler = async (req, res) => {
 
   const payload = { id: user._id };
 
-  const accessToken = jwt.sign(payload, "secret", {
+  const accessToken = jwt.sign(payload, `${process.env.JWT_SECRET}`, {
     expiresIn: "15m",
   });
 
-  const refreshToken = jwt.sign(payload, "secret");
+  const refreshToken = jwt.sign(payload, `${process.env.JWT_SECRET}`);
 
   // Lưu mã làm mới vào cơ sở dữ liệu.
   if (!user.tokens) user.tokens = [refreshToken];
