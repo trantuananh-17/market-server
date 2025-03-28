@@ -116,3 +116,13 @@ authRouter.post("/reset-pass");
 2. Tên phải hợp lệ.
 3. Tìm người dùng và cập nhật tên.
 4. Gửi lại hồ sơ mới.
+
+# `/update-avatar`
+
+1. Người dùng phải đăng nhập.
+2. Đọc file được gửi lên.
+3. Kiểu file phải là hình ảnh.
+4. Kiểm tra xem người dùng đã có avatar hay chưa.
+5. Nếu có, thì xóa avatar cũ.
+6. Tải avatar mới lên và cập nhật người dùng.
+7. Gửi phản hồi lại.
