@@ -1,5 +1,6 @@
 import { Document, model, Schema } from "mongoose";
 import { hash, compare, genSalt } from "bcrypt";
+import { object } from "yup";
 
 interface UserDocument extends Document {
   name: string;
@@ -7,6 +8,7 @@ interface UserDocument extends Document {
   password: string;
   verified: boolean;
   tokens: string[];
+  avatar?: { url: string; id: string };
 }
 
 interface Methods {
@@ -33,6 +35,11 @@ const userSchema = new Schema<UserDocument, {}, Methods>(
       default: false,
     },
     tokens: [String],
+    avatar: {
+      type: Object,
+      url: String,
+      id: String,
+    },
   },
   { timestamps: true }
 );
