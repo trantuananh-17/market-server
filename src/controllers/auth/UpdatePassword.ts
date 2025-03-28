@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { sendErrorRes } from "src/utils/helper";
 import UserModel from "src/models/user";
+import "dotenv/config";
 import mail from "src/utils/mail";
 import PasswordResetToken from "src/models/passwordResetToken";
 

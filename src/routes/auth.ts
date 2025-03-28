@@ -17,6 +17,9 @@ import { GenerateForgetPassLink } from "src/controllers/auth/GenerateForgetPassL
 import { GrantValid } from "src/controllers/auth/GrantValid";
 import { UpdatePassword } from "src/controllers/auth/UpdatePassword";
 import { UpdateProfile } from "src/controllers/auth/UpdateProfile";
+import fileParser from "src/middleware/fileParser";
+import { UpdateAvatar } from "src/controllers/auth/UpdateAvatar";
+import { SendPublicProfile } from "src/controllers/auth/SendPublicProfile";
 
 const authRouter = Router();
 
@@ -41,5 +44,7 @@ authRouter.post(
   UpdatePassword
 );
 authRouter.patch("/update-profile", isAuth, UpdateProfile);
+authRouter.patch("/update-avatar", isAuth, fileParser, UpdateAvatar);
+authRouter.get("/profile/:id", isAuth, SendPublicProfile);
 
 export default authRouter;
