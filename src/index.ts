@@ -6,6 +6,7 @@ import { sendErrorRes } from "./utils/helper";
 import "dotenv/config";
 import formidable from "formidable";
 import path from "path";
+import productRouter from "./routes/product";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //API Routes
 app.use("/api/auth", authRouter);
+app.use("/api/product", productRouter);
 
 // Cách upload file
 app.post("/upload-file", async (req, res) => {

@@ -16,7 +16,7 @@ authRouter.post("/verify-pass-reset-token");
 authRouter.post("/reset-pass");
 ```
 
-# `/sign-up`
+- `/sign-up`
 
 1. Đọc dữ liệu đầu vào: tên, email, mật khẩu.
 2. Xác thực dữ liệu có hợp lệ hay không.
@@ -27,7 +27,7 @@ authRouter.post("/reset-pass");
 7. Gửi liên kết xác minh với mã xác minh đến email đăng ký.
 8. Gửi thông báo yêu cầu kiểm tra hộp thư đến.
 
-# `/verify`
+- `/verify`
 
 1. Đọc dữ liệu: id và token
 2. Tìm token trong cơ sở dữ liệu (sử dụng id của người sở hữu).
@@ -37,7 +37,7 @@ authRouter.post("/reset-pass");
 6. Xóa token khỏi cơ sở dữ liệu.
 7. Gửi thông báo thành công.
 
-# `/sign-in`
+- `/sign-in`
 
 1. Đọc dữ liệu: email và mật khẩu
 2. Tìm người dùng với email đã cung cấp.
@@ -47,7 +47,7 @@ authRouter.post("/reset-pass");
 6. Lưu mã làm mới vào cơ sở dữ liệu.
 7. Gửi cả hai mã cho người dùng.
 
-# `/profile`
+- `/profile`
 
 1. Đọc header xác thực (authorization header)
 2. Kiểm tra xem ta có token không.
@@ -60,13 +60,13 @@ authRouter.post("/reset-pass");
 9. Gọi hàm next().
 10. Xử lý lỗi cho các token đã hết hạn.
 
-# `/verify-token`
+- `/verify-token`
 
 1. Kiểm tra xem người dùng đã được xác thực hay chưa.
 2. Xóa token cũ (nếu có).
 3. Tạo/lưu token mới và gửi phản hồi lại cho người dùng.
 
-# `/refresh-token`
+- `/refresh-token`
 
 1. Đọc và xác thực refresh token.
 2. Tìm người dùng với payload.id và refresh token.
@@ -75,11 +75,11 @@ authRouter.post("/reset-pass");
 5. Nếu token hợp lệ và người dùng được tìm thấy, tạo mới refresh token và access token.
 6. Xóa token cũ, cập nhật người dùng và gửi token mới.
 
-# `/sign-out`
+- `/sign-out`
 
 1. Remove the refresh token
 
-# `/forget-pass`
+- `/forget-pass`
 
 1. Yêu cầu email của người dùng.
 2. Tìm người dùng với email đã cung cấp.
@@ -89,7 +89,7 @@ authRouter.post("/reset-pass");
 6. Gửi liên kết vào email của người dùng.
 7. Gửi phản hồi trở lại.
 
-# `/verify-pass`
+- `/verify-pass`
 
 1. Đọc mã token và id.
 2. Tìm mã token trong cơ sở dữ liệu với id của chủ sở hữu.
@@ -98,7 +98,7 @@ authRouter.post("/reset-pass");
 5. Nếu không trùng khớp, gửi lỗi.
 6. Nếu trùng khớp, gọi hàm tiếp theo.
 
-# `/reset-pass`
+- `/reset-pass`
 
 1. Đọc id người dùng, mã reset mật khẩu và mật khẩu.
 2. Xác thực tất cả các thông tin này.
@@ -110,14 +110,14 @@ authRouter.post("/reset-pass");
 8. Gửi email xác nhận.
 9. Gửi phản hồi trở lại.
 
-# `/update-profile`
+- `/update-profile`
 
 1. Người dùng phải đăng nhập (đã xác thực).
 2. Tên phải hợp lệ.
 3. Tìm người dùng và cập nhật tên.
 4. Gửi lại hồ sơ mới.
 
-# `/update-avatar`
+- `/update-avatar`
 
 1. Người dùng phải đăng nhập.
 2. Đọc file được gửi lên.
@@ -126,3 +126,59 @@ authRouter.post("/reset-pass");
 5. Nếu có, thì xóa avatar cũ.
 6. Tải avatar mới lên và cập nhật người dùng.
 7. Gửi phản hồi lại.
+
+## Product Routes
+
+```
+productRouter.post("/list");
+productRouter.patch("/:id");
+productRouter.delete("/:id");
+productRouter.delete("/image/:productId/:imageId");
+productRouter.get("/:id");
+productRouter.get("/by-category/:category");
+productRouter.get("/latest");
+productRouter.get("/listings");
+
+```
+
+- `/create`
+
+1. Người dùng phải được xác thực.
+2. Người dùng có thể tải lên hình ảnh.
+3. Xác thực dữ liệu đến.
+4. Xác thực và tải lên tệp (hoặc tệp) - lưu ý (giới hạn số lượng hình ảnh).
+5. Tạo sản phẩm.
+6. Gửi phản hồi trở lại.
+
+- `/:id (update to product by id)`
+
+1. Người dùng phải được xác thực.
+2. Người dùng cũng có thể tải lên hình ảnh.
+3. Xác thực dữ liệu đầu vào.
+4. Cập nhật các thuộc tính thông thường.
+5. Tải lên và cập nhật hình ảnh (giới hạn số lượng ảnh).
+6. Gửi phản hồi trở lại.
+
+- `/:id (delete single product)`
+
+1. Người dùng phải được xác thực.
+2. Xác thực ID của sản phẩm.
+3. Chỉ xóa nếu sản phẩm được tạo bởi chính người dùng đó.
+4. Xóa luôn các hình ảnh liên quan.
+5. Gửi phản hồi trở lại.
+
+- `/:id (delete only images)`
+
+1. Người dùng phải được xác thực.
+2. Xác thực ID của sản phẩm.
+3. Xoá ảnh khỏi database (chỉ nếu người dùng là người đã tạo sản phẩm).
+4. Xoá ảnh khỏi Cloudinary nữa.
+5. Gửi phản hồi trở lại.
+
+- `/:id (get details)`
+
+1. Người dùng phải được xác thực (tuỳ chọn).
+2. Xác thực ID của sản phẩm.
+3. Tìm sản phẩm theo ID.
+4. Định dạng lại dữ liệu.
+5. Gửi phản hồi trở lại.

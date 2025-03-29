@@ -2,17 +2,7 @@ import { RequestHandler } from "express";
 import "dotenv/config";
 import { sendErrorRes } from "src/utils/helper";
 import UserModel from "src/models/user";
-import { v2 as cloudinary } from "cloudinary";
-const CLOUD_NAME = process.env.CLOUD_NAME!;
-const CLOUD_KEY = process.env.CLOUD_KEY!;
-const CLOUD_SECRET = process.env.CLOUD_SECRET!;
-
-cloudinary.config({
-  cloud_name: CLOUD_NAME,
-  api_key: CLOUD_KEY,
-  api_secret: CLOUD_SECRET,
-  secure: true,
-});
+import cloudUploader from "src/cloud";
 
 export const UpdateAvatar: RequestHandler = async (req, res) => {
   const { avatar } = req.files;
@@ -33,11 +23,11 @@ export const UpdateAvatar: RequestHandler = async (req, res) => {
 
   if (user.avatar?.id) {
     // xóa file avatar
-    await cloudinary.uploader.destroy(user.avatar.id);
+    await cloudUploader.destroy(user.avatar.id);
   }
 
   // upload file avatar
-  const { secure_url: url, public_id: id } = await cloudinary.uploader.upload(
+  const { secure_url: url, public_id: id } = await cloudUploader.upload(
     avatar.filepath,
     {
       width: 300,
@@ -46,6 +36,7 @@ export const UpdateAvatar: RequestHandler = async (req, res) => {
       gravity: "face",
     }
   );
+
   user.avatar = { url, id };
   await user.save();
 
