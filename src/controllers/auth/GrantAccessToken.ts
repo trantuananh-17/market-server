@@ -4,7 +4,7 @@ import UserModel from "src/models/user";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-export const GrantAccessToken: RequestHandler = async (req, res) => {
+export const grantAccessToken: RequestHandler = async (req, res) => {
   // Đọc và xác thực refresh token.
   const { refreshToken } = req.body;
 

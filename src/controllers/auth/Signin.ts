@@ -4,7 +4,7 @@ import UserModel from "src/models/user";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-export const SignIn: RequestHandler = async (req, res) => {
+export const signIn: RequestHandler = async (req, res) => {
   // Đọc dữ liệu: email và mật khẩu
   const { email, password } = req.body;
 

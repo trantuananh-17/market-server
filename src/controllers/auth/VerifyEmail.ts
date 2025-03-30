@@ -4,7 +4,7 @@ import UserModel from "src/models/user";
 import AuthVerificationToken from "src/models/authVerificationToken";
 import "dotenv/config";
 
-export const VerifyEmail: RequestHandler = async (req, res) => {
+export const verifyEmail: RequestHandler = async (req, res) => {
   // Đọc dữ liệu: id và token
   const { id, token } = req.body;
 

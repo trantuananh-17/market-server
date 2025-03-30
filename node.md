@@ -182,3 +182,11 @@ productRouter.get("/listings");
 3. Tìm sản phẩm theo ID.
 4. Định dạng lại dữ liệu.
 5. Gửi phản hồi trở lại.
+
+- `/by-category/:category`
+
+1. Người dùng phải được xác thực (tuỳ chọn).
+2. Xác thực danh mục.
+3. Tìm sản phẩm theo danh mục (áp dụng phân trang nếu cần).
+4. Định dạng lại dữ liệu.
+5. Gửi phản hồi trở lại.

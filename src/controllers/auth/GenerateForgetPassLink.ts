@@ -6,7 +6,7 @@ import "dotenv/config";
 import PasswordResetToken from "src/models/passwordResetToken";
 import mail from "src/utils/mail";
 
-export const GenerateForgetPassLink: RequestHandler = async (req, res) => {
+export const generateForgetPassLink: RequestHandler = async (req, res) => {
   const { email } = req.body;
   const user = await UserModel.findOne({ email });
 

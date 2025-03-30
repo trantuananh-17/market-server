@@ -12,7 +12,7 @@ const upLoadImage = (filePath: string): Promise<UploadApiResponse> => {
   });
 };
 
-export const CreateProduct: RequestHandler = async (req, res) => {
+export const createProduct: RequestHandler = async (req, res) => {
   const { name, price, category, description, purchasingDate } = req.body;
   const newProduct = new ProductModel({
     owner: req.user.id,

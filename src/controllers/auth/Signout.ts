@@ -3,7 +3,7 @@ import { sendErrorRes } from "src/utils/helper";
 import UserModel from "src/models/user";
 import "dotenv/config";
 
-export const Signout: RequestHandler = async (req, res) => {
+export const signout: RequestHandler = async (req, res) => {
   const { refreshToken } = req.body;
 
   const user = await UserModel.findOne({
