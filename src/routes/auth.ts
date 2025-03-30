@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { generateForgetPassLink } from "src/controllers/auth/generateForgetPassLink";
-import { generateVertificationLink } from "src/controllers/auth/generateVertificationLink";
+import { generateForgetPassLink } from "src/controllers/auth/generateforgetPassLink";
+import { generateVertificationLink } from "src/controllers/auth/generateVerificationLink";
 import { grantAccessToken } from "src/controllers/auth/grantAccessToken";
 import { grantValid } from "src/controllers/auth/grantValid";
 import { sendProfile } from "src/controllers/auth/sendProfile";
