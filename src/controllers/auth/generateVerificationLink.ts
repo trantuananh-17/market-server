@@ -4,7 +4,7 @@ import AuthVerificationToken from "src/models/authVerificationToken";
 import "dotenv/config";
 import mail from "src/utils/mail";
 
-export const GenerateVertificationLink: RequestHandler = async (req, res) => {
+export const generateVertificationLink: RequestHandler = async (req, res) => {
   // Đọc dữ liệu: id và token
   const { id } = req.body;
   const token = crypto.randomBytes(36).toString("hex");

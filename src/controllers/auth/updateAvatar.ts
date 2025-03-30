@@ -4,7 +4,7 @@ import { sendErrorRes } from "src/utils/helper";
 import UserModel from "src/models/user";
 import cloudUploader from "src/cloud";
 
-export const UpdateAvatar: RequestHandler = async (req, res) => {
+export const updateAvatar: RequestHandler = async (req, res) => {
   const { avatar } = req.files;
 
   if (Array.isArray(avatar)) {

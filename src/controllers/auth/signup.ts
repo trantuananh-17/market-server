@@ -6,7 +6,7 @@ import AuthVerificationToken from "src/models/authVerificationToken";
 import "dotenv/config";
 import mail from "src/utils/mail";
 
-export const Signup: RequestHandler = async (req, res) => {
+export const signup: RequestHandler = async (req, res) => {
   // Đọc dữ liệu đầu vào: tên, email, mật khẩu.
   const { email, password, name } = req.body;
 

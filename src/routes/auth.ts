@@ -1,50 +1,50 @@
 import { Router } from "express";
+import { generateForgetPassLink } from "src/controllers/auth/generateforgetPassLink";
+import { generateVertificationLink } from "src/controllers/auth/generateVerificationLink";
+import { grantAccessToken } from "src/controllers/auth/grantAccessToken";
+import { grantValid } from "src/controllers/auth/grantValid";
+import { sendProfile } from "src/controllers/auth/sendProfile";
+import { sendPublicProfile } from "src/controllers/auth/sendPublicProfile";
+import { signIn } from "src/controllers/auth/signin";
+import { signout } from "src/controllers/auth/signout";
+import { signup } from "src/controllers/auth/signup";
+import { updateAvatar } from "src/controllers/auth/updateAvatar";
+import { updatePassword } from "src/controllers/auth/updatePassword";
+import { updateProfile } from "src/controllers/auth/updateProfile";
+import { verifyEmail } from "src/controllers/auth/verifyEmail";
+import fileParser from "src/middleware/fileParser";
+import { isAuth, isValidPassResetToken } from "src/middleware/isAuth";
 import validate from "src/middleware/validator";
 import {
   newUserSchema,
   resetPasswordSchema,
   verifyTokenSchema,
 } from "src/utils/validationSchema";
-import { Signup } from "src/controllers/auth/Signup";
-import { VerifyEmail } from "src/controllers/auth/VerifyEmail";
-import { SignIn } from "src/controllers/auth/Signin";
-import { isAuth, isValidPassResetToken } from "src/middleware/isAuth";
-import { SendProfile } from "src/controllers/auth/SendProfile";
-import { GenerateVertificationLink } from "src/controllers/auth/GenerateVertificationLink";
-import { GrantAccessToken } from "src/controllers/auth/GrantAccessToken";
-import { Signout } from "src/controllers/auth/Signout";
-import { GenerateForgetPassLink } from "src/controllers/auth/GenerateForgetPassLink";
-import { GrantValid } from "src/controllers/auth/GrantValid";
-import { UpdatePassword } from "src/controllers/auth/UpdatePassword";
-import { UpdateProfile } from "src/controllers/auth/UpdateProfile";
-import fileParser from "src/middleware/fileParser";
-import { UpdateAvatar } from "src/controllers/auth/UpdateAvatar";
-import { SendPublicProfile } from "src/controllers/auth/SendPublicProfile";
 
 const authRouter = Router();
 
-authRouter.post("/sign-up", validate(newUserSchema), Signup);
-authRouter.post("/verify", validate(verifyTokenSchema), VerifyEmail);
-authRouter.get("/verify-token", isAuth, GenerateVertificationLink);
-authRouter.post("/sign-in", SignIn);
-authRouter.get("/profile", isAuth, SendProfile);
-authRouter.post("/refresh-token", GrantAccessToken);
-authRouter.post("/sign-out", isAuth, Signout);
-authRouter.post("/forget-pass", GenerateForgetPassLink);
+authRouter.post("/sign-up", validate(newUserSchema), signup);
+authRouter.post("/verify", validate(verifyTokenSchema), verifyEmail);
+authRouter.get("/verify-token", isAuth, generateVertificationLink);
+authRouter.post("/sign-in", signIn);
+authRouter.get("/profile", isAuth, sendProfile);
+authRouter.post("/refresh-token", grantAccessToken);
+authRouter.post("/sign-out", isAuth, signout);
+authRouter.post("/forget-pass", generateForgetPassLink);
 authRouter.post(
   "/verify-pass-reset-token",
   validate(verifyTokenSchema),
   isValidPassResetToken,
-  GrantValid
+  grantValid
 );
 authRouter.post(
   "/reset-pass",
   validate(resetPasswordSchema),
   isValidPassResetToken,
-  UpdatePassword
+  updatePassword
 );
-authRouter.patch("/update-profile", isAuth, UpdateProfile);
-authRouter.patch("/update-avatar", isAuth, fileParser, UpdateAvatar);
-authRouter.get("/profile/:id", isAuth, SendPublicProfile);
+authRouter.patch("/update-profile", isAuth, updateProfile);
+authRouter.patch("/update-avatar", isAuth, fileParser, updateAvatar);
+authRouter.get("/profile/:id", isAuth, sendPublicProfile);
 
 export default authRouter;

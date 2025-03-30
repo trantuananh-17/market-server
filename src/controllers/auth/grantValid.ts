@@ -4,6 +4,6 @@ import AuthVerificationToken from "src/models/authVerificationToken";
 import "dotenv/config";
 import mail from "src/utils/mail";
 
-export const GrantValid: RequestHandler = async (req, res) => {
+export const grantValid: RequestHandler = async (req, res) => {
   res.json({ valid: true });
 };

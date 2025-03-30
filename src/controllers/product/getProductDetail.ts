@@ -4,7 +4,7 @@ import ProductModel from "src/models/product";
 import { isValidObjectId } from "mongoose";
 import { UserDocument } from "src/models/user";
 
-export const GetProductDetail: RequestHandler = async (req, res) => {
+export const getProductDetail: RequestHandler = async (req, res) => {
   const { id } = req.params;
 
   if (!isValidObjectId(id)) return sendErrorRes(res, "Invalid product id", 422);

@@ -182,3 +182,25 @@ productRouter.get("/listings");
 3. Tìm sản phẩm theo ID.
 4. Định dạng lại dữ liệu.
 5. Gửi phản hồi trở lại.
+
+- `/by-category/:category?pageNum=''&limit='' (Panigation`
+
+1. Người dùng phải được xác thực (tuỳ chọn).
+2. Xác thực danh mục.
+3. Tìm sản phẩm theo danh mục (áp dụng phân trang nếu cần).
+4. Định dạng lại dữ liệu.
+5. Gửi phản hồi trở lại.
+
+- `/latest`
+
+1. Người dùng phải được xác thực (tuỳ chọn).
+2. Tìm tất cả sản phẩm theo thứ tự ngày (áp dụng giới hạn/phân trang nếu cần).
+3. Định dạng lại dữ liệu.
+4. Gửi phản hồi trở lại.
+
+- `/listings`
+
+1. Người dùng phải được xác thực.
+2. Tìm tất cả sản phẩm do người dùng này tạo (áp dụng phân trang nếu cần).
+3. Định dạng lại dữ liệu.
+4. Gửi phản hồi trở lại.

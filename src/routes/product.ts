@@ -1,9 +1,12 @@
 import { Router } from "express";
-import { CreateProduct } from "src/controllers/product/CreateProduct";
-import { DeleteProduct } from "src/controllers/product/DeleteProduct";
-import { DeleteProductImage } from "src/controllers/product/DeleteProductImage";
-import { GetProductDetail } from "src/controllers/product/GetProductDetail";
-import { UpdateProduct } from "src/controllers/product/UpdateProduct";
+import { createProduct } from "src/controllers/product/createProduct";
+import { deleteProduct } from "src/controllers/product/deleteProduct";
+import { deleteProductImage } from "src/controllers/product/deleteProductImage";
+import { getLatestProducts } from "src/controllers/product/getLatestProducts";
+import { getListings } from "src/controllers/product/getListings";
+import { getProductDetail } from "src/controllers/product/getProductDetail";
+import { getProductsByCategory } from "src/controllers/product/getProductsByCategory";
+import { updateProduct } from "src/controllers/product/updateProduct";
 import fileParser from "src/middleware/fileParser";
 import { isAuth } from "src/middleware/isAuth";
 import validate from "src/middleware/validator";
@@ -16,17 +19,20 @@ productRouter.post(
   isAuth,
   fileParser,
   validate(newProductSchema),
-  CreateProduct
+  createProduct
 );
 productRouter.patch(
   "/:id",
   isAuth,
   fileParser,
   validate(newProductSchema),
-  UpdateProduct
+  updateProduct
 );
-productRouter.delete("/:id", isAuth, DeleteProduct);
-productRouter.delete("/image/:productId/:imageId", isAuth, DeleteProductImage);
-productRouter.get("/:id", isAuth, GetProductDetail);
+productRouter.delete("/:id", isAuth, deleteProduct);
+productRouter.delete("/image/:productId/:imageId", isAuth, deleteProductImage);
+productRouter.get("/detail/:id", isAuth, getProductDetail);
+productRouter.get("/by-category/:category", getProductsByCategory);
+productRouter.get("/latest", getLatestProducts);
+productRouter.get("/listings", isAuth, getListings);
 
 export default productRouter;

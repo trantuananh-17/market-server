@@ -5,7 +5,7 @@ import "dotenv/config";
 import mail from "src/utils/mail";
 import PasswordResetToken from "src/models/passwordResetToken";
 
-export const UpdatePassword: RequestHandler = async (req, res) => {
+export const updatePassword: RequestHandler = async (req, res) => {
   const { id, password } = req.body;
   const user = await UserModel.findById(id);
 

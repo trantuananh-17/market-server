@@ -4,7 +4,7 @@ import { sendErrorRes } from "src/utils/helper";
 import UserModel from "src/models/user";
 import { isValidObjectId } from "mongoose";
 
-export const SendPublicProfile: RequestHandler = async (req, res) => {
+export const sendPublicProfile: RequestHandler = async (req, res) => {
   const profileId = req.params.id;
 
   if (!isValidObjectId(profileId)) {

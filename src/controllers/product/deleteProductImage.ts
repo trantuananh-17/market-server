@@ -4,7 +4,7 @@ import ProductModel from "src/models/product";
 import { isValidObjectId } from "mongoose";
 import cloudUploader, { cloudApi } from "src/cloud";
 
-export const DeleteProductImage: RequestHandler = async (req, res) => {
+export const deleteProductImage: RequestHandler = async (req, res) => {
   const { productId, imageId } = req.params;
 
   if (!isValidObjectId(productId))
