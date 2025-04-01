@@ -7,8 +7,10 @@ import "dotenv/config";
 import formidable from "formidable";
 import path from "path";
 import productRouter from "./routes/product";
+import { connectDB } from "src/db";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static("src/public"));
 app.use(express.json());
@@ -34,6 +36,11 @@ app.use(function (err, req, res, next) {
   sendErrorRes(res, err.message, 500);
 } as express.ErrorRequestHandler);
 
-app.listen(process.env.PORT, () => {
-  console.log(`The app is running on http://localhost:${process.env.PORT}`);
+// app.listen(process.env.PORT, () => {
+//   console.log(`The app is running on http://localhost:${process.env.PORT}`);
+// });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  connectDB();
 });
