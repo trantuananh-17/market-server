@@ -8,7 +8,7 @@ import formidable from "formidable";
 import path from "path";
 import productRouter from "./routes/product";
 import { connectDB } from "src/db";
-import job from "./cron";
+import job from "./render";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
