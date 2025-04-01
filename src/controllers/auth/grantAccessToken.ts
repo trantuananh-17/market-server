@@ -11,7 +11,9 @@ export const grantAccessToken: RequestHandler = async (req, res) => {
   if (!refreshToken) return sendErrorRes(res, "Unauthorized request!", 403);
 
   //  Xác thực refresh token và lấy payload.
-  const payload = jwt.verify(refreshToken, "secret") as { id: string };
+  const payload = jwt.verify(refreshToken, `${process.env.JWT_SECRET}`) as {
+    id: string;
+  };
 
   // Kiểm tra nếu payload không có id (token không hợp lệ hoặc bị lỗi).
   if (!payload.id) sendErrorRes(res, "Unauthorized request!", 401);

@@ -10,7 +10,7 @@ interface UserProfile {
   name: string;
   email: string;
   verified: boolean;
-  avatar?: String;
+  avatar?: string;
 }
 
 declare global {

@@ -1,7 +1,6 @@
 import category from "src/utils/category";
 import { isValidObjectId } from "mongoose";
 import * as yup from "yup";
-import { parse } from "path";
 import { parseISO } from "date-fns";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

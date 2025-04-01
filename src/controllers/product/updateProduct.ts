@@ -34,7 +34,8 @@ export const updateProduct: RequestHandler = async (req, res) => {
   if (typeof thumbnail === "string") product.thumbnail = thumbnail;
 
   const oldImages = product.images?.length || 0;
-  if (oldImages >= 5) {
+
+  if (oldImages > 5) {
     return sendErrorRes(res, "Product already has 5 images", 422);
   }
 
@@ -75,11 +76,9 @@ export const updateProduct: RequestHandler = async (req, res) => {
     const uploadPromise = images.map((file) => upLoadImage(file.filepath));
     const uploadResult = await Promise.all(uploadPromise);
 
-    const newImages = (product.images = uploadResult.map(
-      ({ secure_url, public_id }) => {
-        return { url: secure_url, id: public_id };
-      }
-    ));
+    const newImages = uploadResult.map(({ secure_url, public_id }) => {
+      return { url: secure_url, id: public_id };
+    });
 
     if (product.images) product.images.push(...newImages);
     else product.images = newImages;
