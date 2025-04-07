@@ -27,7 +27,7 @@ export const grantAccessToken: RequestHandler = async (req, res) => {
   if (!user) {
     // người dùng bị xâm phạm, xóa tất cả các tokens trước đó
     await UserModel.findByIdAndUpdate(payload.id, { tokens: [] });
-    return sendErrorRes(res, "Unauthorized request1!", 401);
+    return sendErrorRes(res, "Unauthorized request!", 401);
   }
 
   // Nếu refresh token hợp lệ và người dùng đã được xác thực, tạo mới access token và refresh token.
