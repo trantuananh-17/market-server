@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import "dotenv/config";
 import { sendErrorRes } from "src/utils/helper";
 import UserModel from "src/models/user";
-import cloudUploader from "src/cloud";
+import cloudUploader from "src/config/cloud";
 
 export const updateAvatar: RequestHandler = async (req, res) => {
   const { avatar } = req.files;

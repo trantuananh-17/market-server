@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { sendErrorRes } from "src/utils/helper";
 import ProductModel from "src/models/product";
 import { isValidObjectId } from "mongoose";
-import cloudUploader, { cloudApi } from "src/cloud";
+import cloudUploader, { cloudApi } from "src/config/cloud";
 
 export const deleteProductImage: RequestHandler = async (req, res) => {
   const { productId, imageId } = req.params;

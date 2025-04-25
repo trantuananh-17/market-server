@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { sendErrorRes } from "src/utils/helper";
 import ProductModel from "src/models/product";
 import { isValidObjectId } from "mongoose";
-import { cloudApi } from "src/cloud";
+import { cloudApi } from "src/config/cloud";
 
 export const deleteProduct: RequestHandler = async (req, res) => {
   const productId = req.params.id;

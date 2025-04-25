@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { sendErrorRes } from "src/utils/helper";
 import { UploadApiResponse } from "cloudinary";
 import ProductModel from "src/models/product";
-import cloudUploader from "src/cloud";
+import cloudUploader from "src/config/cloud";
 
 const upLoadImage = (filePath: string): Promise<UploadApiResponse> => {
   return cloudUploader.upload(filePath, {
